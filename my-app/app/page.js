@@ -64,7 +64,16 @@ export default function Home() {
       >
         <h1>Dog Pictures</h1>
       </div>
-      <img src={images[currentImage]} height={"300px"} width={"300px"} />
+      {images.length > 0 ? (
+        <Image
+          src={images[currentImage]}
+          alt="dog-photo"
+          width={300}
+          height={300}
+        />
+      ) : (
+        <p>Loading...</p>
+      )}
       <br />
       <div
         style={{

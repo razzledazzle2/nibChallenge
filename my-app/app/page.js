@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Image from "next/image";
 import styles from "./page.module.css";
@@ -9,59 +9,78 @@ export default function Home() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch('https://dog.ceo/api/breed/whippet/images');
+        const response = await fetch(
+          "https://dog.ceo/api/breed/whippet/images"
+        );
 
         const data = await response.json();
         setImages(data.message);
-
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     }
 
     fetchData();
-  }, [])
+  }, []);
 
-  const [currentImage, setCurrentImage] = useState(0)
-  
+  const [currentImage, setCurrentImage] = useState(0);
 
   const handleNext = () => {
     if (currentImage + 1 > images.length - 1) {
-      return 
+      return;
     }
-    setCurrentImage(prev => prev + 1) 
-  }
+    setCurrentImage((prev) => prev + 1);
+  };
 
   const handlePrev = () => {
     if (currentImage - 1 < 0) {
-      return 
+      return;
     }
-    setCurrentImage(prev => prev - 1) 
-  }
+    setCurrentImage((prev) => prev - 1);
+  };
 
   const handleStart = () => {
-    setCurrentImage(0) 
-  }
+    setCurrentImage(0);
+  };
 
   const handleLast = () => {
-    setCurrentImage(images.length - 1) 
-  }
+    setCurrentImage(images.length - 1);
+  };
   return (
-    <div className={styles.page}>
-      <img 
-        src={images[currentImage]}
-        height={'300px'}
-        width={'300px'}
-      />
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          maxWidth: "300px",
+        }}
+      >
+        <h1>Dog Pictures</h1>
+      </div>
+      <img src={images[currentImage]} height={"300px"} width={"300px"} />
       <br />
-      <button onClick={() => handlePrev()}>Prev</button>
-      <button onClick={() => handleNext()}>Next</button>
-
-      <br />
-      <br />
-      <button onClick={() => handleStart()}>Start</button>
-      <button onClick={() => handleLast()}>Last</button>
-
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "12px",
+          marginTop: "10px",
+          maxWidth: "300px",
+        }}
+      >
+        <button onClick={() => handleStart()}>Start</button>
+        <button onClick={() => handlePrev()}>Prev</button>
+        <button onClick={() => handleNext()}>Next</button>
+        <button onClick={() => handleLast()}>Last</button>
+      </div>
     </div>
   );
 }

@@ -38,6 +38,14 @@ export default function Home() {
     }
     setCurrentImage(prev => prev - 1) 
   }
+
+  const handleStart = () => {
+    setCurrentImage(0) 
+  }
+
+  const handleLast = () => {
+    setCurrentImage(images.length - 1) 
+  }
   return (
     <div className={styles.page}>
       <img 
@@ -46,8 +54,14 @@ export default function Home() {
         width={'300px'}
       />
       <br />
-      <button onClick={() => handleNext()}>Next</button>
       <button onClick={() => handlePrev()}>Prev</button>
+      <button onClick={() => handleNext()}>Next</button>
+
+      <br />
+      <br />
+      <button onClick={() => handleStart()}>Start</button>
+      <button onClick={() => handleLast()}>Last</button>
+
     </div>
   );
 }
